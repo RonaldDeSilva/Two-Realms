@@ -40,22 +40,34 @@ public class Player_Controller : MonoBehaviour
         }
         else { dPress = false; }
 
-        if (Input.GetKey(KeyCode.SpaceBar))
+        if (!jPress && !jumping)
         {
-            jPress = true;
+            /*if (Input.GetKey(KeyCode.SpaceBar))
+            {
+                jPress = true;
+            }*/
         }
-        else { dPress = false; }
     }
 
     void FixedUpdate()
     {
         
         float hAdd = 0f;
-        float vAdd = 0f;
 
-        if (dPress == true) { hAdd += speed; }
-        if (aPress == true) { hAdd -= speed; }
+        if (dPress == true) { hAdd += 5; }
+        if (aPress == true) { hAdd -= 5; }
 
-        rb.velocity = new Vector2(hAdd, vAdd);
+        rb.velocity = new Vector2(hAdd, rb.velocity.y);
+        if (jPress) {
+            //rb.AddForce(0f, 10f, 0f);
+            jPress = false;
+            jumping = true;
+        }
     }
+
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        jumping = false;
+    }
+
 }
