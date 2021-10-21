@@ -8,6 +8,8 @@ TagManager:
   - Floor
   - Turn
   - Enemy
+  - Spike
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

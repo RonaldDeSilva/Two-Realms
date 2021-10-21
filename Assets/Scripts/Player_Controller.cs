@@ -31,6 +31,10 @@ public class Player_Controller : MonoBehaviour
     
     void Update()
     {
+        if (GameController == null)
+        {
+            GameController = GameObject.Find("Game Controller");
+        }
         #region Player Input Checker
         if (Input.GetKey("a"))
         {
@@ -116,6 +120,20 @@ public class Player_Controller : MonoBehaviour
                     rb.AddForce(new Vector3(-Mathf.Clamp01(collider.gameObject.transform.position.x - transform.position.x) * knockback, knockback/2,0));
                 }
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Spike"))
+        {
+            Instantiate(GameController.GetComponent<Game_Controller>().PlayerPreFab, GameController.GetComponent<Game_Controller>().curCheckPoint.transform.position ,this.transform.rotation);
+            Destroy(this.gameObject);
+        }
+
+        if (col.gameObject.CompareTag("Checkpoint"))
+        {
+            GameController.GetComponent<Game_Controller>().curCheckPoint = col.gameObject;
         }
     }
 }

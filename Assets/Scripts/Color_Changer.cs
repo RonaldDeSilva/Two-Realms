@@ -14,6 +14,10 @@ public class Color_Changer : MonoBehaviour
     }
     void Update()
     {
+        if (GameController == null)
+        {
+            GameController = GameObject.Find("Game Controller");
+        }
         if (GameController.GetComponent<Game_Controller>().red)
         {
             spr.sprite = sprList[0];

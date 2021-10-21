@@ -10,7 +10,10 @@ public class Camera_Follow : MonoBehaviour
 
     void Update()
     {
-
+        if (Player == null)
+        {
+            Player = GameObject.FindWithTag("Player");
+        }
         Vector3 diff = new Vector3((Player.transform.position.x - transform.position.x) * Time.deltaTime * camSpd, (Player.transform.position.y - transform.position.y) * Time.deltaTime * camSpd, 0);
         transform.position = transform.position + diff;
     }
