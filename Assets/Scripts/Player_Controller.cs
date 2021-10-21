@@ -5,11 +5,13 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     #region Player Stats
-    public int health;
+    public int health = 1;
     public float speed;
     public float jumpHeight;
     public float platDisty;
     public float platDistx;
+    public float enemyDistx;
+    public float knockback;
     #endregion
     #region GC and RB
     public Rigidbody2D rb;
@@ -88,19 +90,32 @@ public class Player_Controller : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.CompareTag("Platform")) {
+        if (collider.gameObject.CompareTag("Platform"))
+        {
             if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) < platDistx)
             {
                 jumping = false;
             }
         }
-        else
+        if (collider.gameObject.CompareTag("Floor"))
         {
-            if (collider.gameObject.CompareTag("Floor"))
+            jumping = false;
+        }
+
+        if (collider.gameObject.CompareTag("Enemy"))
+        {
+            if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) < enemyDistx)
             {
-                jumping = false;
+                Vector3 jump = new Vector3(0, jumpHeight * 2, 0);
+                rb.AddForce(jump);
+            }
+            else
+            {
+                if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) >= enemyDistx)
+                {
+                    rb.AddForce(new Vector3(-Mathf.Clamp01(collider.gameObject.transform.position.x - transform.position.x) * knockback, knockback/2,0));
+                }
             }
         }
     }
-
 }
