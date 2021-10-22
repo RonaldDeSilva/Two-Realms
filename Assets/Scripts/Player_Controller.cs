@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -77,6 +78,7 @@ public class Player_Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !dying)
         {
+            GameController.GetComponent<Game_Controller>().PlayTorch();
             GameController.GetComponent<Game_Controller>().red = !GameController.GetComponent<Game_Controller>().red;
         }
         #endregion
@@ -120,6 +122,7 @@ public class Player_Controller : MonoBehaviour
         }
 
         if (jPress && !dying) {
+            GameController.GetComponent<Game_Controller>().PlayJump();
             rb.AddForce(jump);
             jPress = false;
             jumping = true;
@@ -134,12 +137,14 @@ public class Player_Controller : MonoBehaviour
         {
             if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) < platDistx)
             {
+                GameController.GetComponent<Game_Controller>().PlayLanding();
                 jumping = false;
                 grounded = true;
             }
         }
         if (collider.gameObject.CompareTag("Floor"))
         {
+            GameController.GetComponent<Game_Controller>().PlayLanding();
             jumping = false;
             grounded = true;
         }
@@ -148,6 +153,7 @@ public class Player_Controller : MonoBehaviour
         {
             if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) < enemyDistx)
             {
+                GameController.GetComponent<Game_Controller>().PlayJump1();
                 Vector3 jump = new Vector3(0, jumpHeight * 2, 0);
                 rb.AddForce(jump);
             }
@@ -176,10 +182,16 @@ public class Player_Controller : MonoBehaviour
         {
             GameController.GetComponent<Game_Controller>().curCheckPoint = col.gameObject;
         }
+
+        if (col.gameObject.CompareTag("Door"))
+        {
+            StartCoroutine("sceneTransition");
+        }
     }
 
     IEnumerator KnockbackL()
     {
+        GameController.GetComponent<Game_Controller>().PlayEnemy();
         Hit = true;
         rb.velocity = new Vector3(-knockback, knockback/3, 0);
         yield return new WaitForSeconds(0.3f);
@@ -188,6 +200,7 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator KnockbackR()
     {
+        GameController.GetComponent<Game_Controller>().PlayEnemy();
         Hit = true;
         rb.velocity = new Vector3(knockback, knockback / 3, 0);
         yield return new WaitForSeconds(0.3f);
@@ -206,5 +219,33 @@ public class Player_Controller : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         Instantiate(GameController.GetComponent<Game_Controller>().PlayerPreFab, GameController.GetComponent<Game_Controller>().curCheckPoint.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
+    }
+
+    IEnumerator sceneTransition()
+    {
+        audio.Stop();
+        dying = true;
+        rb.velocity = new Vector3(0, 0, 0);
+        audio.clip = sounds[2];
+        audio.volume = 1f;
+        audio.loop = false;
+        audio.Play();
+        yield return new WaitForSeconds(2.5f);
+        if (SceneManager.GetActiveScene().name == "Level 1")
+        {
+            SceneManager.LoadScene("Level 2");
+        }
+        if (SceneManager.GetActiveScene().name == "Level 2")
+        {
+            SceneManager.LoadScene("Level 3");
+        }
+        if (SceneManager.GetActiveScene().name == "Level 3")
+        {
+            SceneManager.LoadScene("Level 4");
+        }
+        if (SceneManager.GetActiveScene().name == "Level 4")
+        {
+            SceneManager.LoadScene("Level 5");
+        }
     }
 }

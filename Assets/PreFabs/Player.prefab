@@ -160,18 +160,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9ebf35c9e91784d40943c82b523e70f7, type: 3}
   - {fileID: 8300000, guid: 1ec669f4ca575b94fbcf72d7f2f5eb02, type: 3}
   - {fileID: 8300000, guid: b0e745275bc67a44fa24e7eedee28c9d, type: 3}
-  - {fileID: 8300000, guid: 6ce11f8be59f0814894089512d360aa8, type: 3}
-  - {fileID: 8300000, guid: 1e89df571fe033c47a7ad28b2f09967e, type: 3}
-  - {fileID: 8300000, guid: c8e5ebee1775c8d4e8a1666974faa390, type: 3}
-  - {fileID: 8300000, guid: 2da680951b7b72c46abbeaec6f881517, type: 3}
-  - {fileID: 8300000, guid: fab25d6826c12e9468479c1a64adf1c0, type: 3}
-  - {fileID: 8300000, guid: 64b6a1c34d6af764faf6c26f4de4ce38, type: 3}
   jumping: 0
   aPress: 0
   dPress: 0
   jPress: 0
   Hit: 0
   walking: 0
+  grounded: 0
+  dying: 0
 --- !u!114 &9132418407667845104
 MonoBehaviour:
   m_ObjectHideFlags: 0
