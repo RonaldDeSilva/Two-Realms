@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9132418407667845116}
   - component: {fileID: 9132418407667845119}
   - component: {fileID: 9132418407667845107}
-  - component: {fileID: 9132418407667845104}
   - component: {fileID: 1194891788}
   - component: {fileID: 8274385011099337150}
   m_Layer: 0
@@ -171,23 +170,6 @@ MonoBehaviour:
   walking: 0
   grounded: 0
   dying: 0
---- !u!114 &9132418407667845104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9132418407667845118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53e6a9f28e13664ebf61224737216b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 9132418407667845117}
-  GameController: {fileID: 0}
-  sprList:
-  - {fileID: -3406435351134741055, guid: dc3f312bd4a71d44eb184370baf54f6a, type: 3}
-  - {fileID: 8779011859077130016, guid: 3ffc1e6456382b64eb211271ae1a1f38, type: 3}
 --- !u!82 &1194891788
 AudioSource:
   m_ObjectHideFlags: 0

@@ -42,6 +42,10 @@ public class Player_Controller : MonoBehaviour
         audio.clip = sounds[0];
         audio.loop = true;
         audio.volume = 0.5f;
+        if (GameController == null)
+        {
+            GameController = GameObject.Find("Game Controller");
+        }
     }
     
     void Update()
@@ -114,7 +118,7 @@ public class Player_Controller : MonoBehaviour
             }
         }
 
-        if (!grounded)
+        if (!grounded && !dying)
         {
             audio.Stop();
             walking = false;
@@ -142,6 +146,7 @@ public class Player_Controller : MonoBehaviour
             jumping = true;
             grounded = false;
             anim.SetBool("Jump", true);
+            anim.SetBool("Walk", false);
         }
         #endregion
     }
@@ -192,6 +197,8 @@ public class Player_Controller : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Spike"))
         {
+            dying = true;
+            StopAllCoroutines();
             StartCoroutine("Death");
         }
 
@@ -226,9 +233,9 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator Death()
     {
+        rb.gravityScale = 0;
         audio.Stop();
-        dying = true;
-        rb.velocity = new Vector3(0,0,0);
+        rb.velocity = new Vector3(0, 0, 0);
         audio.clip = sounds[1];
         audio.volume = 1f;
         audio.loop = false;
@@ -263,6 +270,10 @@ public class Player_Controller : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level 4")
         {
             SceneManager.LoadScene("Level 5");
+        }
+        if (SceneManager.GetActiveScene().name == "Level 5")
+        {
+            SceneManager.LoadScene("Win");
         }
     }
 }
