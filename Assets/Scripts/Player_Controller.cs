@@ -16,6 +16,8 @@ public class Player_Controller : MonoBehaviour
     #region GC and RB
     public Rigidbody2D rb;
     public GameObject GameController;
+    public AudioSource audio;
+    public AudioClip[] sounds = new AudioClip[9];
     #endregion
     #region Bools
     [HideInInspector] public bool jumping = false;
@@ -23,11 +25,18 @@ public class Player_Controller : MonoBehaviour
     [HideInInspector] public bool dPress = false;
     [HideInInspector] public bool jPress = false;
     [HideInInspector] public bool Hit = false;
+    [HideInInspector] public bool walking = false;
+    [HideInInspector] public bool grounded = false;
+    [HideInInspector] public bool dying = false;
     #endregion
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audio = GetComponent<AudioSource>();
+        audio.clip = sounds[0];
+        audio.loop = true;
+        audio.volume = 0.5f;
     }
     
     void Update()
@@ -66,7 +75,7 @@ public class Player_Controller : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !dying)
         {
             GameController.GetComponent<Game_Controller>().red = !GameController.GetComponent<Game_Controller>().red;
         }
@@ -80,18 +89,41 @@ public class Player_Controller : MonoBehaviour
 
         Vector3 jump = new Vector3(0, jumpHeight, 0);
 
+        if (dPress || aPress && grounded && !dying)
+        {
+            if (!walking)
+            {
+                audio.Play();
+                walking = true;
+            }
+        }
+        else {
+            if (!dying)
+            {
+                audio.Stop();
+                walking = false;
+            }
+        }
+
+        if (!grounded)
+        {
+            audio.Stop();
+            walking = false;
+        }
+
         if (dPress == true) { hAdd += speed; }
         if (aPress == true) { hAdd -= speed; }
 
-        if (!Hit)
+        if (!Hit && !dying)
         {
             rb.velocity = new Vector2(hAdd, rb.velocity.y);
         }
 
-        if (jPress) {
+        if (jPress && !dying) {
             rb.AddForce(jump);
             jPress = false;
             jumping = true;
+            grounded = false;
         }
         #endregion
     }
@@ -103,11 +135,13 @@ public class Player_Controller : MonoBehaviour
             if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) < platDistx)
             {
                 jumping = false;
+                grounded = true;
             }
         }
         if (collider.gameObject.CompareTag("Floor"))
         {
             jumping = false;
+            grounded = true;
         }
 
         if (collider.gameObject.CompareTag("Enemy"))
@@ -135,8 +169,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Spike"))
         {
-            Instantiate(GameController.GetComponent<Game_Controller>().PlayerPreFab, GameController.GetComponent<Game_Controller>().curCheckPoint.transform.position ,this.transform.rotation);
-            Destroy(this.gameObject);
+            StartCoroutine("Death");
         }
 
         if (col.gameObject.CompareTag("Checkpoint"))
@@ -159,5 +192,19 @@ public class Player_Controller : MonoBehaviour
         rb.velocity = new Vector3(knockback, knockback / 3, 0);
         yield return new WaitForSeconds(0.3f);
         Hit = false;
+    }
+
+    IEnumerator Death()
+    {
+        audio.Stop();
+        dying = true;
+        rb.velocity = new Vector3(0,0,0);
+        audio.clip = sounds[1];
+        audio.volume = 1f;
+        audio.loop = false;
+        audio.Play();
+        yield return new WaitForSeconds(2.5f);
+        Instantiate(GameController.GetComponent<Game_Controller>().PlayerPreFab, GameController.GetComponent<Game_Controller>().curCheckPoint.transform.position, this.transform.rotation);
+        Destroy(this.gameObject);
     }
 }
