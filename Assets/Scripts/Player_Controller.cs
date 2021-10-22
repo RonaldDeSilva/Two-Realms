@@ -20,6 +20,7 @@ public class Player_Controller : MonoBehaviour
     public AudioSource audio;
     public AudioClip[] sounds = new AudioClip[9];
     public SpriteRenderer spr;
+    public Animator anim;
     #endregion
     #region Bools
     [HideInInspector] public bool jumping = false;
@@ -37,6 +38,7 @@ public class Player_Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spr = GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         audio.clip = sounds[0];
         audio.loop = true;
         audio.volume = 0.5f;
@@ -80,6 +82,7 @@ public class Player_Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !dying)
         {
+            anim.SetBool("Red", !anim.GetBool("Red"));
             GameController.GetComponent<Game_Controller>().PlayTorch();
             GameController.GetComponent<Game_Controller>().red = !GameController.GetComponent<Game_Controller>().red;
         }
@@ -99,6 +102,7 @@ public class Player_Controller : MonoBehaviour
             {
                 audio.Play();
                 walking = true;
+                anim.SetBool("Walk", true);
             }
         }
         else {
@@ -106,6 +110,7 @@ public class Player_Controller : MonoBehaviour
             {
                 audio.Stop();
                 walking = false;
+                anim.SetBool("Walk", false);
             }
         }
 
@@ -113,6 +118,7 @@ public class Player_Controller : MonoBehaviour
         {
             audio.Stop();
             walking = false;
+            anim.SetBool("Walk", false);
         }
 
         if (dPress == true) { hAdd += speed; }
@@ -129,6 +135,7 @@ public class Player_Controller : MonoBehaviour
             jPress = false;
             jumping = true;
             grounded = false;
+            anim.SetBool("Jump", true);
         }
         #endregion
     }
@@ -142,6 +149,7 @@ public class Player_Controller : MonoBehaviour
                 GameController.GetComponent<Game_Controller>().PlayLanding();
                 jumping = false;
                 grounded = true;
+                anim.SetBool("Jump", false);
             }
         }
         if (collider.gameObject.CompareTag("Floor"))
@@ -149,6 +157,7 @@ public class Player_Controller : MonoBehaviour
             GameController.GetComponent<Game_Controller>().PlayLanding();
             jumping = false;
             grounded = true;
+            anim.SetBool("Jump", false);
         }
 
         if (collider.gameObject.CompareTag("Enemy"))
