@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-    //private bool turning = false;
-    //private bool redEnemy = true;
+
     public int health;
     public bool left = true;
     public float speed;
     public Rigidbody2D rb;
     public float turnTime;
-    //public GameObject GameController;
 
     void Start()
     {

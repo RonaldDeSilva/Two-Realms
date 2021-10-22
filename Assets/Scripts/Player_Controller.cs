@@ -19,6 +19,7 @@ public class Player_Controller : MonoBehaviour
     public GameObject GameController;
     public AudioSource audio;
     public AudioClip[] sounds = new AudioClip[9];
+    public SpriteRenderer spr;
     #endregion
     #region Bools
     [HideInInspector] public bool jumping = false;
@@ -34,6 +35,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spr = GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
         audio.clip = sounds[0];
         audio.loop = true;
