@@ -121,8 +121,14 @@ public class Player_Controller : MonoBehaviour
             anim.SetBool("Walk", false);
         }
 
-        if (dPress == true) { hAdd += speed; }
-        if (aPress == true) { hAdd -= speed; }
+        if (dPress == true) { 
+            hAdd += speed;
+            spr.flipX = false;
+        }
+        if (aPress == true) { 
+            hAdd -= speed;
+            spr.flipX = true;
+        }
 
         if (!Hit && !dying)
         {
