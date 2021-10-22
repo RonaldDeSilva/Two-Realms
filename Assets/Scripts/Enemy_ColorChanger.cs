@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class Enemy_ColorChanger : MonoBehaviour
 {
     public GameObject GameController;
-    public bool redPlat;
+    public bool redEnemy;
 
     void Start()
     {
@@ -14,10 +14,10 @@ public class Platform : MonoBehaviour
             GameController = GameObject.Find("Game Controller");
         }
     }
-
+    
     void Update()
     {
-        if (GameController.GetComponent<Game_Controller>().red != redPlat)
+        if (GameController.GetComponent<Game_Controller>().red != redEnemy)
         {
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.25f);
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;

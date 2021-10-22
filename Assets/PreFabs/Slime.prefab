@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 2829643468856707384}
   - component: {fileID: 2829643468856707385}
   - component: {fileID: 2829643468856707382}
-  - component: {fileID: 2829643468856707383}
   - component: {fileID: 2829643468856707386}
   - component: {fileID: 2829643468856707387}
+  - component: {fileID: 42089928}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b96426354702a142aa426a0e7bd727f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,23 +102,6 @@ MonoBehaviour:
   left: 1
   speed: 10
   rb: {fileID: 2829643468856707387}
---- !u!114 &2829643468856707383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2829643468856707380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53e6a9f28e13664ebf61224737216b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 2829643468856707385}
-  GameController: {fileID: 0}
-  sprList:
-  - {fileID: 21300000, guid: 11437f90d138aea44b42fa4dd0cb00ee, type: 3}
-  - {fileID: 21300000, guid: 4b96426354702a142aa426a0e7bd727f, type: 3}
 --- !u!61 &2829643468856707386
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +119,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.0227273, y: 1.0227273}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -157,7 +140,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 6
@@ -166,3 +149,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &42089928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829643468856707380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1da9a4f0cdf7e6488e9f8f77cfb3cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 0}
+  redEnemy: 0

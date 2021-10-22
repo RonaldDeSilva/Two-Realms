@@ -10,11 +10,13 @@ public class Slime : MonoBehaviour
     public bool left = true;
     public float speed;
     public Rigidbody2D rb;
+    public float turnTime;
     //public GameObject GameController;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine("turnAround");
     }
 
     void Update()
@@ -51,16 +53,9 @@ public class Slime : MonoBehaviour
     {
         //turning = true;
         left = !left;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(turnTime);
+        StartCoroutine("turnAround");
         //turning = false;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Turn"))
-        {
-            StartCoroutine("turnAround");
-        }
     }
 
 }

@@ -22,6 +22,7 @@ public class Player_Controller : MonoBehaviour
     [HideInInspector] public bool aPress = false;
     [HideInInspector] public bool dPress = false;
     [HideInInspector] public bool jPress = false;
+    [HideInInspector] public bool Hit = false;
     #endregion
 
     void Start()
@@ -82,7 +83,10 @@ public class Player_Controller : MonoBehaviour
         if (dPress == true) { hAdd += speed; }
         if (aPress == true) { hAdd -= speed; }
 
-        rb.velocity = new Vector2(hAdd, rb.velocity.y);
+        if (!Hit)
+        {
+            rb.velocity = new Vector2(hAdd, rb.velocity.y);
+        }
 
         if (jPress) {
             rb.AddForce(jump);
@@ -115,9 +119,13 @@ public class Player_Controller : MonoBehaviour
             }
             else
             {
-                if (collider.gameObject.transform.position.y - transform.position.y < platDisty && Mathf.Abs(collider.gameObject.transform.position.x - transform.position.x) >= enemyDistx)
+                if (collider.gameObject.transform.position.x - transform.position.x > 0)
                 {
-                    rb.AddForce(new Vector3(-Mathf.Clamp01(collider.gameObject.transform.position.x - transform.position.x) * knockback, knockback/2,0));
+                    StartCoroutine("KnockbackL");
+                }
+                if (collider.gameObject.transform.position.x - transform.position.x < 0)
+                {
+                    StartCoroutine("KnockbackR");
                 }
             }
         }
@@ -135,5 +143,21 @@ public class Player_Controller : MonoBehaviour
         {
             GameController.GetComponent<Game_Controller>().curCheckPoint = col.gameObject;
         }
+    }
+
+    IEnumerator KnockbackL()
+    {
+        Hit = true;
+        rb.velocity = new Vector3(-knockback, knockback/3, 0);
+        yield return new WaitForSeconds(0.3f);
+        Hit = false;
+    }
+
+    IEnumerator KnockbackR()
+    {
+        Hit = true;
+        rb.velocity = new Vector3(knockback, knockback / 3, 0);
+        yield return new WaitForSeconds(0.3f);
+        Hit = false;
     }
 }

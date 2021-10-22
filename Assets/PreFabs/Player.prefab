@@ -151,13 +151,14 @@ MonoBehaviour:
   platDisty: 1
   platDistx: 2.25
   enemyDistx: 1
-  knockback: 30
+  knockback: 25
   rb: {fileID: 0}
   GameController: {fileID: 0}
   jumping: 0
   aPress: 0
   dPress: 0
   jPress: 0
+  Hit: 0
 --- !u!114 &9132418407667845104
 MonoBehaviour:
   m_ObjectHideFlags: 0

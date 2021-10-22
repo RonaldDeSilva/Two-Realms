@@ -11,11 +11,13 @@ public class Flying_Enemy : MonoBehaviour
     public float speedy;
     public float speedx;
     public Rigidbody2D rb;
+    public float turnTime;
     //public GameObject GameController;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine("turnAround");
     }
 
     void Update()
@@ -50,17 +52,8 @@ public class Flying_Enemy : MonoBehaviour
 
     IEnumerator turnAround()
     {
-        //turning = true;
         left = !left;
-        yield return new WaitForSeconds(0.5f);
-        //turning = false;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Turn"))
-        {
-            StartCoroutine("turnAround");
-        }
+        yield return new WaitForSeconds(turnTime);
+        StartCoroutine("turnAround");
     }
 }

@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8271170411354600749}
   - component: {fileID: 8271170411354600746}
   - component: {fileID: 8271170411354600747}
-  - component: {fileID: 8271170411354600744}
   - component: {fileID: 8271170411354600745}
   - component: {fileID: 8271170411354600742}
+  - component: {fileID: 771306405}
   m_Layer: 0
   m_Name: Flyer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11437f90d138aea44b42fa4dd0cb00ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,23 +103,6 @@ MonoBehaviour:
   speedy: 4
   speedx: 0
   rb: {fileID: 8271170411354600742}
---- !u!114 &8271170411354600744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8271170411354600743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53e6a9f28e13664ebf61224737216b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 8271170411354600746}
-  GameController: {fileID: 0}
-  sprList:
-  - {fileID: 21300000, guid: 11437f90d138aea44b42fa4dd0cb00ee, type: 3}
-  - {fileID: 21300000, guid: 4b96426354702a142aa426a0e7bd727f, type: 3}
 --- !u!61 &8271170411354600745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,7 +120,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.0333333, y: 1.0333333}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -167,3 +150,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &771306405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8271170411354600743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1da9a4f0cdf7e6488e9f8f77cfb3cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 0}
+  redEnemy: 1
