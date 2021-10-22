@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-    //private bool turning = false;
-    //private bool redEnemy = true;
+
     public int health;
     public bool left = true;
     public float speed;
     public Rigidbody2D rb;
     public float turnTime;
-    //public GameObject GameController;
 
     void Start()
     {
@@ -21,22 +19,6 @@ public class Slime : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (turn)
-        {
-            StartCoroutine("turnAround");
-            turn = false;
-        }
-
-        if (!turning)
-        {
-            if (GameController.GetComponent<Game_Controller>().red == redEnemy)
-            {
-                turn = true;
-            }
-        }
-        */
-
         if (left)
         {
             rb.velocity = new Vector3(-speed, 0, 0);
@@ -45,8 +27,6 @@ public class Slime : MonoBehaviour
         {
             rb.velocity = new Vector3(speed, 0, 0);
         }
-
-
     }
 
     IEnumerator turnAround()
