@@ -10,6 +10,14 @@ public class Game_Controller : MonoBehaviour
     public AudioClip[] sounds = new AudioClip[6];
     public AudioSource audio;
 
+    void Start()
+    {
+        audio.clip = sounds[6];
+        audio.loop = true;
+        audio.volume = 0.8f;
+        audio.Play();
+    }
+
     public void PlayEnemy()
     {
         audio.PlayOneShot(sounds[0], 1f);

@@ -21,22 +21,6 @@ public class Slime : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (turn)
-        {
-            StartCoroutine("turnAround");
-            turn = false;
-        }
-
-        if (!turning)
-        {
-            if (GameController.GetComponent<Game_Controller>().red == redEnemy)
-            {
-                turn = true;
-            }
-        }
-        */
-
         if (left)
         {
             rb.velocity = new Vector3(-speed, 0, 0);
@@ -45,8 +29,6 @@ public class Slime : MonoBehaviour
         {
             rb.velocity = new Vector3(speed, 0, 0);
         }
-
-
     }
 
     IEnumerator turnAround()
