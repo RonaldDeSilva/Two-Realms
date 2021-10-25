@@ -1446,6 +1446,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6465267919893170782, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6465267919893170783, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
       propertyPath: m_Name
       value: Spike (4)
@@ -2476,6 +2480,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6465267919893170782, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465267919893170782, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465267919893170782, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fbb1e8f5fdcda3e43bdd33081bdc29fa, type: 3}
+    - target: {fileID: 6465267919893170782, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6465267919893170783, guid: bd7f0250e35bb9b4cade17435bf3c67c, type: 3}
       propertyPath: m_Name
       value: Spike (6)
@@ -2595,7 +2615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1000
   m_Sprite: {fileID: 21300000, guid: ec14d3615aedf1f40b534f03c2c06874, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
